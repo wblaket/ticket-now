@@ -1,0 +1,16 @@
+{% extends "tickets/base.html" %}
+{% load user_tags %}
+{% block content %}
+<p> Ticket Details: </p>
+    <p> Ticket Number: {{ ticket.tkt_number}}</p>
+    <p> Title: {{ ticket.title}}</p>
+    <p> Desc: {{ ticket.desc|linebreaks }}</p>
+    <p> Date: {{ ticket.date_added|date:'M d, Y H:i'}}</p>
+    <p> Prority: {{ ticket.ticket_priority}}</p>
+    <p> Status: {{ ticket.tkt_status}}</p>
+    <p> Assigned to: {{ ticket.assignment}}</p>
+
+{% if request.user|has_group:"Technican" %}
+  <button><a href="{% url 'tickets:edit_ticket' ticket.tkt_number %}">Update Ticket</a></button>
+{% endif %}
+{% endblock content %}

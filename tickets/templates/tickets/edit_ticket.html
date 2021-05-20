@@ -1,0 +1,17 @@
+{% extends "tickets/base.html" %}
+{% block content %}
+
+<p> Edit Ticket: </p>
+<form action="{% url 'tickets:edit_ticket' ticket.tkt_number %}" method='post'>
+  <p> Ticket Number: {{ ticket.tkt_number}}</p>
+  <p> Title: {{ ticket.title}}</p>
+  <p> Description: {{ ticket.desc|linebreaks }}</p>
+  <p> Date: {{ ticket.date_added|date:'M d, Y H:i'}}</p>
+  <p> Prority: {{ ticket.ticket_priority}}</p>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button name="submit">Save Changes</button>
+</form>
+
+
+{% endblock content %}

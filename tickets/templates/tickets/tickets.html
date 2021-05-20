@@ -1,0 +1,35 @@
+{% extends "tickets/base.html" %}
+{% block content %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+
+    <div class="container">
+      <table class="table">
+        <h2>Tickets</h2>
+        <thead>
+          <tr>
+            <th>Ticket #</th>
+            <th>Title</th>
+            <th>Submitter</th>
+            <th>Status</th>
+            <th>Date Submitted</th>
+
+        </thead>
+        <tbody>
+        {% for ticket in tickets %}
+          <tr>
+            <td><a href="{% url 'tickets:ticket' ticket.tkt_number %}">{{ ticket.tkt_number }}</a></td>
+            <td> {{ ticket.title }}</td>
+            <td> {{ ticket.owner }} </td>
+            <td> {{ ticket.tkt_status }} </td>
+            <td>{{ ticket.date_added }} </td>
+          </tr>
+
+    {% empty %}
+      <li> No tickets have been entered yet. </li>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <button><a href="{% url 'tickets:new_ticket' %}">Submit a new ticket</a></button>
+{% endblock content %}
